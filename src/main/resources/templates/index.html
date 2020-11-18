@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+    <head>
+        <meta charset="UTF-8">
+        <title>..:: Universidad de Lima ::..</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    </head>
+    <body>
+    <th:block th:include="_header"></th:block>
+    <th:block th:include="_menu"></th:block>
+
+    <div class="page-title">Pagina Inicial UL</div>
+    <div class="demo-container">
+        <h3>Programas remotos de apoyo</h3>
+        <ul>
+            <li>SOPORTE GRACIAS A:</li>
+            <li>TeamViewer</li>
+            <li>AnyDesk</li>
+            
+        </ul>
+    </div>
+
+    <th:block th:include="_footer"></th:block>
+
+</body>
+</html>

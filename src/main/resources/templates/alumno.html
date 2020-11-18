@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Alumno</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+      
+   </head>
+   <body>
+       
+  
+   
+      <th:block th:include="_header"></th:block>
+      <th:block th:include="_menu"></th:block>
+      
+      <div class="page-title">Alumno</div>
+      <div class="error-message" th:if="${errorMessage!= null}"  th:utext="${errorMessage}">
+      </div>
+      
+      <form  th:object="${alumnoForm}" th:action="@{/admin/manejarAlumno}" 
+                    method="POST" enctype="multipart/form-data">
+         
+          <table style="text-align:left;">
+            <tr>
+               <td>Codigo *</td>
+               <td style="color:red;">
+                  <input th:field="*{newAlumno}" type="hidden" />
+                  <input type="text" th:if="${alumnoForm.newAlumno}" 
+                                                 th:field="*{codigo}" />  
+                  <th:block th:if="${!alumnoForm.newAlumno}">   
+                          <span th:utext="${alumnoForm.codigo}"></span>   
+                          <input type="hidden" th:field="*{codigo}" />                                       
+                  </th:block>   
+               </td>
+               <td>
+                  <span class="error-message" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}">..</span>
+               </td>   
+            </tr>
+            <tr>
+               <td>Nombre *</td>
+               <td>
+                   <input th:field="*{nombre}"  />
+               </td>
+               <td>
+                  <span class="error-message" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">..</span>
+               </td>
+            </tr>
+            <tr>
+               <td>Edad *</td>
+               <td>
+                   <input th:field="*{edad}"  />
+               </td>
+               <td>
+                  <span class="error-message" th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}">..</span>
+               </td>
+            </tr>
+            <tr>
+               <td>Imagen</td>
+               <td>
+                  <img th:src="@{|/alumnoImage?code=${alumnoForm.codigo}|}" width="100"/>
+               </td>
+               <td> </td>
+            </tr>
+            <tr>
+               <td>Cargar Imagen</td>
+               <td>
+                   <input type="file" th:field="*{fileData}" />
+               </td>
+               <td> </td>
+            </tr>
+            <tr>
+               <td>&nbsp;</td>
+               <td>
+                  <input type="submit" value="Grabar/Actualizar" />
+                  <input type="reset" value="Limpiar" />
+               </td>
+            </tr>
+         </table>
+      </form>
+      
+      <th:block th:include="_footer"></th:block>
+      
+   </body>
+</html>

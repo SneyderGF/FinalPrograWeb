@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Login</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+   </head>
+   <body>
+      <th:block th:include="_header"></th:block>
+      <th:block th:include="_menu"></th:block>
+      
+      <div class="page-title">Login (S&oacute;lo para Alumnos , Profesores o Administrador)</div>
+      
+      <div class="login-container">
+         <h3>Ingresa tu usuario y clave</h3>
+         <br>
+         <!-- /login?error=true -->
+         <th:block th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+             <div th:if= "${#request.getParameter('error') == 'true'}"
+                style="color: red; margin: 10px 0px;">
+                Falla al hacer Login !!!<br /> Motivo :
+                <span th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></span>
+             </div>
+         </th:block>
+         
+         <form method="POST"
+            th:action="@{login}">
+            <table>
+               <tr>
+                  <td>Usuario *</td>
+                  <td><input type="text" name="userName" /></td>
+               </tr>
+               <tr>
+                  <td>Clave *</td>
+                  <td><input type="password" name="password" /></td>
+               </tr>
+               <tr>
+                  <td>&nbsp;</td>
+                  <td>
+                      <input type="submit" value="Login" />
+                      <input type="reset"  value="Reset" />
+                  </td>
+               </tr>
+            </table>
+         </form>
+         
+         <span class="error-message" th:utext="${error}"></span>
+      </div>
+      
+      
+      <th:block th:include="_footer"></th:block>
+      
+   </body>
+</html>

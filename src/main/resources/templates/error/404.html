@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>URL no existe</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+   </head>
+   
+   <body>
+   
+      <th:block th:insert="_header"></th:block>
+      <th:block th:insert="_menu"></th:block>
+      
+      <div class="page-title">El URL no existe!</div>
+      <h3 style="color:red;">
+          Si tu página ya no está disponible y no hay ninguna sustituta clara, debería devolver un código de respuesta 404 (página no encontrada) o 410 (página no disponible). Cualquiera de esos códigos indica claramente a los navegadores y a los motores de búsqueda que la página no existe. También puedes hacer que se muestre al usuario una página 404 personalizada que, por ejemplo, contenga una lista de tus páginas web más populares o un enlace a tu página principal.
+      </h3>
+      <p>Fuente: <a href="https://support.google.com/webmasters/answer/181708?hl=es">Soporte Google</a>
+      </p>
+      
+      <th:block th:insert="_footer"></th:block>
+      
+   </body>
+</html>

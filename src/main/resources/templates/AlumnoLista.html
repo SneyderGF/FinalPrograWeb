@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html <html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+   <head>
+      <meta charset="UTF-8">
+      <title>..:: Lista de Alumnos ::..</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+   </head>
+   <body>
+      <th:block th:include="_header"></th:block>
+      <th:block th:include="_menu"></th:block>
+      
+      <div class="page-title">Lista de Alumnos</div>
+      
+      <div class="product-preview-container" th:each="p : ${paginationAlumno}">
+         <ul>
+            <li><img class="product-image" th:src="@{|/alumnoImagen?code=${p.codigo}|}" /></li>
+            <li>Codigo: <span th:utext="${p.codigo}"></span></li>
+            <li>Nombre: <span th:utext="${p.nombre}"></span></li>
+            <li>Edad: <span th:utext="${#numbers.formatDecimal(p.edad,0,2,'POINT')}"></span></li>
+            
+            
+            <!-- Solo el MANAGER puede editar productos -->
+            <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+               <li>
+                 <a style="color:red;"
+                      th:href="@{|/admin/manejarAlumno?code=${p.codigo}|}">
+                      Editar Alumno
+                 </a>
+               </li>
+            </th:block>
+         </ul>
+      </div>
+      
+      <br/>
+      <div class="page-navigator" th:if="${totalPages > 1}">
+          <th:block th:each="pag : ${navigationPages}">
+              <a class="nav-item" 
+                 th:href="@{|/listarAlumno?page=${pag}|}" 
+                 th:if="${pag != -1}" th:utext="${pag}">
+              </a>
+
+              <span class="nav-item" th:if="${pag == -1}"> ... </span>
+
+          </th:block>
+      </div>
+      
+      <th:block th:include="_footer"></th:block>
+      
+   </body>
+</html>
